@@ -14,7 +14,7 @@ const FormError = ({ message }: FormErrorProps) => {
   return (
       <div className=' bg-destructive/15 px-3 rounded-md flex items-center gap-x-2 text-sm text-destructive'>
           <ExclamationTriangleIcon className='h-4 w-4' />
-          <p>{ message }</p>
+          <p className='p-2'>{ message }</p>
     </div>
   )
 }
