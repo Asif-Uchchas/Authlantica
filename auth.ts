@@ -26,15 +26,23 @@ export const {
   },
   callbacks: {
 
-    // async signIn({ user }) {
+    async signIn({ user, account }) {
+      //Allow OAuth without using email verification
 
-    //   const existingUser = await getUserById(user.id as string)
+      if (account?.provider !== "credentials") {
+        return true;
+      }
 
-    //   if (!existingUser || !existingUser.emailVerified) {
-    //     return true
-    //   }
-    //   return true
-    // },
+      const existingUser = await getUserById(user.id as string)
+
+      //Prevent sign in without email verification
+      if (!existingUser?.emailVerified) {
+        return false
+      }
+
+      //Add 2FA check
+      return true
+    },
 
     async session({ token, session }) {
       // Send properties to the client, like an access_token from a provider.
